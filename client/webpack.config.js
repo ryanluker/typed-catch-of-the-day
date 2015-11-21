@@ -10,8 +10,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.tsx?$/, loader: 'ts-loader'},
-      { test: /\.styl$/, loader: 'style!css' }
+      { test: /\.tsx?$/, loader: 'ts-loader' },
+      { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' }
     ]
   }
 }
