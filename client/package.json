@@ -27,6 +27,7 @@
     "ts-loader": "^0.7.1",
     "typescript": "^1.6.2",
     "webpack": "^1.12.6",
-    "webpack-dev-server": "^1.12.1"
+    "webpack-dev-server": "^1.12.1",
+    "stylus-loader": "^1.4.2"
   }
 }
