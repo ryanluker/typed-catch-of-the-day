@@ -2,6 +2,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 /**
+ * Interfaces
+ */
+interface HeaderProps {
+  tagline: string
+}
+
+/**
  * App container
  */
 class App extends React.Component<any, any> {
@@ -43,7 +50,7 @@ class Inventory extends React.Component<any, any> {
 /**
  * Header Component
  */
-class Header extends React.Component<any, any> {
+class Header extends React.Component<HeaderProps, any> {
   render() {
     return (
       <header className="top">
