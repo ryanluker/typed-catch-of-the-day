@@ -1,12 +1,7 @@
-import React = require('react');
-import DOM = require('react-dom');
-
-import ReactRouter = require('react-router');
-import Route = ReactRouter.Route;
-import Router = ReactRouter.Router;
-
-import History = require('history');
-import createHistory = History.createHistory;
+import * as React from 'react';
+import { render } from 'react-dom';
+import { createHistory } from 'history';
+import { Router, Route } from 'react-router';
 
 /**
  * Interfaces
@@ -100,4 +95,4 @@ var routes = (
   </Router>
 )
 
-DOM.render(routes, document.getElementById('main'));
+render(routes, document.getElementById('main'));
