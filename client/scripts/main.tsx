@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import { createHistory } from 'history';
 import { Router, Route } from 'react-router';
 
+import h from './helpers';
+
 /**
  * Interfaces
  */
@@ -78,7 +80,7 @@ class StorePicker extends React.Component<any, any> {
     return (
       <form className="store-selector">
         <h2>Please Enter a Store</h2>
-        <input type="text" ref="storeId" required />
+        <input type="text" ref="storeId" defaultValue={h.getFunName()} required />
         <input type="submit" />
       </form>
     )
