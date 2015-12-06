@@ -86,12 +86,24 @@ class StorePicker extends React.Component<any, any> {
 }
 
 /**
+ * Not Found
+ */
+class NotFound extends React.Component<any, any> {
+  render() {
+    return (
+      <h1>Not Found</h1>
+    )
+  }
+}
+
+/**
  * Routes
  */
 var routes = (
   <Router history={createHistory()}>
     <Route path="/" component={StorePicker}/>
     <Route path="/store/:storeId" component={App}/>
+    <Route path="*" component={NotFound}/>
   </Router>
 )
 
