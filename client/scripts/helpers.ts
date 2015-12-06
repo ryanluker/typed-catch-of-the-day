@@ -1,7 +1,7 @@
 interface HelpersInterface {
   formatPrice(cents: number);
-  rando(arr: Array<String>);
-  slugify(text: String);
+  rando(arr: Array<string>);
+  slugify(text: string);
   getFunName();
 }
 
@@ -16,10 +16,10 @@ class helpers implements HelpersInterface {
   }
   /**
    * Takes an array and returns a random one
-   * @param {Array<String>} arr - array of strings
+   * @param {Array<string>} arr - array of strings
    * @returns {String} one element from the given array of strings
    */
-  rando(arr: Array<String>) {
+  rando(arr: Array<string>) {
     return arr[Math.floor(Math.random() * arr.length)];
   }
 
@@ -28,7 +28,7 @@ class helpers implements HelpersInterface {
    * @param {String} text - text to become simpler
    * @returns {string} slug form of string
    */
-  slugify(text: String) {
+  slugify(text: string) {
     return text.toString().toLowerCase()
       .replace(/\s+/g, '-')           // Replace spaces with -
       .replace(/[^\w\-]+/g, '')       // Remove all non-word chars

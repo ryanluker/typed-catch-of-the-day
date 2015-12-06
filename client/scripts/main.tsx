@@ -3,7 +3,8 @@ import { render } from 'react-dom';
 import { createHistory } from 'history';
 import { Router, Route } from 'react-router';
 
-import h from './helpers';
+import helpers from './helpers';
+let h = new helpers();
 
 /**
  * Interfaces
