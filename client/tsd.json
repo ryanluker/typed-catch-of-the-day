@@ -6,31 +6,31 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "react/react.d.ts": {
-      "commit": "fa04c80f4a889613b96cb4f283848c61a9f64233"
+      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "webpack/webpack.d.ts": {
-      "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
+      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "react/react-dom.d.ts": {
-      "commit": "fa04c80f4a889613b96cb4f283848c61a9f64233"
+      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "react-mixin/react-mixin.d.ts": {
-      "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
+      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "react-router/react-router.d.ts": {
-      "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
+      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "firebase/firebase.d.ts": {
-      "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
-    },
-    "history/history.d.ts": {
-      "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
+      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "node/node.d.ts": {
-      "commit": "fa04c80f4a889613b96cb4f283848c61a9f64233"
+      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "stylus/stylus.d.ts": {
-      "commit": "fa04c80f4a889613b96cb4f283848c61a9f64233"
+      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+    },
+    "react-router/history.d.ts": {
+      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     }
   }
 }
