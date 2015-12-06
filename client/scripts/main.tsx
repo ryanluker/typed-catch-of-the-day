@@ -1,12 +1,7 @@
-import React = require('react');
-import DOM = require('react-dom');
-
-import ReactRouter = require('react-router');
-import Route = ReactRouter.Route;
-import Router = ReactRouter.Router;
-
-import History = require('history');
-import createHistory = History.createHistory;
+import * as React from 'react';
+import { render } from 'react-dom';
+import { createHistory } from 'history';
+import { Router, Route } from 'react-router';
 
 /**
  * Interfaces
@@ -91,13 +86,25 @@ class StorePicker extends React.Component<any, any> {
 }
 
 /**
+ * Not Found
+ */
+class NotFound extends React.Component<any, any> {
+  render() {
+    return (
+      <h1>Not Found</h1>
+    )
+  }
+}
+
+/**
  * Routes
  */
 var routes = (
   <Router history={createHistory()}>
     <Route path="/" component={StorePicker}/>
     <Route path="/store/:storeId" component={App}/>
+    <Route path="*" component={NotFound}/>
   </Router>
 )
 
-DOM.render(routes, document.getElementById('main'));
+render(routes, document.getElementById('main'));
