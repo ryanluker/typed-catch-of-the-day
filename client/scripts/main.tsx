@@ -1,5 +1,12 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React = require('react');
+import DOM = require('react-dom');
+
+import ReactRouter = require('react-router');
+import Route = ReactRouter.Route;
+import Router = ReactRouter.Router;
+
+import History = require('history');
+import createHistory = History.createHistory;
 
 /**
  * Interfaces
@@ -83,4 +90,14 @@ class StorePicker extends React.Component<any, any> {
   }
 }
 
-ReactDOM.render(<App/>, document.getElementById('main'));
+/**
+ * Routes
+ */
+var routes = (
+  <Router history={createHistory()}>
+    <Route path="/" component={StorePicker}/>
+    <Route path="/store/:storeId" component={App}/>
+  </Router>
+)
+
+DOM.render(routes, document.getElementById('main'));

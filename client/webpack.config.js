@@ -6,11 +6,14 @@ module.exports = {
   },
   devtool: 'sourcemap',
   resolve: {
-    extensions: ['', '.webpack.js', '.js', '.ts', '.tsx']
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
   },
   module: {
     loaders: [
       { test: /\.tsx?$/, loader: 'ts-loader' }
     ]
+  },
+  devServer: {
+    historyApiFallback: true
   }
 }
