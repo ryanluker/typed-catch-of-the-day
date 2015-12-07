@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { render } from 'react-dom';
+import { render, findDOMNode } from 'react-dom';
 import { createHistory } from 'history';
-import { Router, Route } from 'react-router';
+import { Router, Route, History } from 'react-router';
 
 import helpers from './helpers';
 let h = new helpers();
@@ -77,9 +77,14 @@ class Header extends React.Component<HeaderProps, any> {
  * Store Picker example
  */
 class StorePicker extends React.Component<any, any> {
+  goToStore(event: React.FormEvent) {
+    event.preventDefault();
+    let storeInput = findDOMNode<HTMLInputElement>(this.refs['storeId']);
+    this.props.history.replaceState(null, '/store/' + storeInput.value);
+  }
   render() {
     return (
-      <form className="store-selector">
+      <form className="store-selector" onSubmit={e => this.goToStore(e)}>
         <h2>Please Enter a Store</h2>
         <input type="text" ref="storeId" defaultValue={h.getFunName()} required />
         <input type="submit" />
