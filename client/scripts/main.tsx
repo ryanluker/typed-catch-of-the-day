@@ -1,16 +1,16 @@
-import * as React from 'react';
-import { render, findDOMNode } from 'react-dom';
-import { createHistory } from 'history';
-import { Router, Route, History } from 'react-router';
+import * as React from "react";
+import { render, findDOMNode } from "react-dom";
+import { createHistory } from "history";
+import { Router, Route, History } from "react-router";
 
-import helpers from './helpers';
+import helpers from "./helpers";
 let h = new helpers();
 
 /**
  * Interfaces
  */
 interface HeaderProps {
-  tagline: string
+  tagline: string;
 }
 
 /**
@@ -26,7 +26,7 @@ class App extends React.Component<any, any> {
         <Order />
         <Inventory />
       </div>
-    )
+    );
   }
 }
 
@@ -37,7 +37,7 @@ class Order extends React.Component<any, any> {
   render() {
     return (
       <p>Order</p>
-    )
+    );
   }
 }
 
@@ -48,7 +48,7 @@ class Inventory extends React.Component<any, any> {
   render() {
     return (
       <p>Inventory</p>
-    )
+    );
   }
 }
 
@@ -69,7 +69,7 @@ class Header extends React.Component<HeaderProps, any> {
         </h1>
         <h3 className="tagline"><span>{this.props.tagline}</span></h3>
       </header>
-    )
+    );
   }
 }
 
@@ -79,8 +79,8 @@ class Header extends React.Component<HeaderProps, any> {
 class StorePicker extends React.Component<any, any> {
   goToStore(event: React.FormEvent) {
     event.preventDefault();
-    let storeInput = findDOMNode<HTMLInputElement>(this.refs['storeId']);
-    this.props.history.replaceState(null, '/store/' + storeInput.value);
+    let storeInput = findDOMNode<HTMLInputElement>(this.refs["storeId"]);
+    this.props.history.replaceState(null, "/store/" + storeInput.value);
   }
   render() {
     return (
@@ -89,7 +89,7 @@ class StorePicker extends React.Component<any, any> {
         <input type="text" ref="storeId" defaultValue={h.getFunName()} required />
         <input type="submit" />
       </form>
-    )
+    );
   }
 }
 
@@ -100,7 +100,7 @@ class NotFound extends React.Component<any, any> {
   render() {
     return (
       <h1>Not Found</h1>
-    )
+    );
   }
 }
 
@@ -113,6 +113,6 @@ var routes = (
     <Route path="/store/:storeId" component={App}/>
     <Route path="*" component={NotFound}/>
   </Router>
-)
+);
 
-render(routes, document.getElementById('main'));
+render(routes, document.getElementById("main"));
