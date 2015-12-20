@@ -81,7 +81,7 @@ class StorePicker extends React.Component<any, any> {
     event.preventDefault();
     let storeInput = findDOMNode<HTMLInputElement>(this.refs["storeId"]);
     this.props.history.replaceState(null, "/store/" + storeInput.value);
-  }
+  };
   render() {
     return (
       <form className="store-selector" onSubmit={this.goToStore}>
