@@ -13,14 +13,6 @@ interface HeaderProps {
   tagline: string;
 }
 
-interface FishObject {
-  name: string;
-  price: number;
-  status: string;
-  desc: string;
-  image: string;
-}
-
 interface FishDataProps {
   key: number;
   index: number;
@@ -28,11 +20,29 @@ interface FishDataProps {
   addToOrder(key: number);
 }
 
+interface OrderProps {
+  fishes: Object;
+  order: Object;
+}
+
+interface InventoryProps {
+  addFish(fish: FishObject);
+  loadSamples();
+}
+
 interface AddFishProps {
   /**
    * takes an object of type Fish and saves it to the app state fishes
    */
   addFish(fish: FishObject);
+}
+
+interface FishObject {
+  name: string;
+  price: number;
+  status: string;
+  desc: string;
+  image: string;
 }
 
 /**
@@ -75,6 +85,14 @@ class App extends React.Component<any, any> {
   };
 
   render() {
+    let orderProps: OrderProps = {
+      fishes: this.state.fishes,
+      order: this.state.order
+    };
+    let inventoryProps: InventoryProps = {
+      addFish: this.addFish,
+      loadSamples: this.loadSamples
+    };
     return (
       <div className="catch-of-the-day">
         <div className="menu">
@@ -83,8 +101,8 @@ class App extends React.Component<any, any> {
             {Object.keys(this.state.fishes).map(this.renderFish)}
           </ul>
         </div>
-        <Order />
-        <Inventory addFish={this.addFish} loadSamples={this.loadSamples}/>
+        <Order {...orderProps}/>
+        <Inventory {...inventoryProps}/>
       </div>
     );
   }
