@@ -22,10 +22,10 @@ interface FishObject {
 }
 
 interface FishDataProps {
-  key: string;
-  index: string;
+  key: number;
+  index: number;
   details: FishObject;
-  addToOrder(key: string);
+  addToOrder(key: number);
 }
 
 interface AddFishProps {
@@ -59,7 +59,7 @@ class App extends React.Component<any, any> {
     });
   };
 
-  public renderFish = (key: string) => {
+  public renderFish = (key: any) => {
     let fishData: FishDataProps = {
       key: key,
       index: key,
@@ -69,7 +69,7 @@ class App extends React.Component<any, any> {
     return <Fish {...fishData}/>;
   };
 
-  public addToOrder = (key: string) => {
+  public addToOrder = (key: number) => {
     this.state.order[key] = this.state.order[key] + 1 || 1;
     this.setState({ order: this.state.order });
   };
