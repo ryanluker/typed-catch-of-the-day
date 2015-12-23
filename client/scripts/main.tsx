@@ -13,7 +13,7 @@ interface HeaderProps {
   tagline: string;
 }
 
-interface Fish {
+interface FishObject {
   name: string;
   price: number;
   status: string;
@@ -21,11 +21,17 @@ interface Fish {
   image: string;
 }
 
+interface FishDataProps {
+  key: number;
+  index: number;
+  details: FishObject;
+}
+
 interface AddFishProps {
   /**
    * takes an object of type Fish and saves it to the app state fishes
    */
-  addFish(fish: Fish);
+  addFish(fish: FishObject);
 }
 
 /**
@@ -40,10 +46,25 @@ class App extends React.Component<any, any> {
     };
   };
 
-  public addFish = (fish: Fish) => {
+  public addFish = (fish: FishObject) => {
     let timestamp = (new Date()).getTime();
     this.state.fishes["fish-" + timestamp] = fish;
     this.setState({fishes: this.state.fishes});
+  };
+
+  public loadSamples = () => {
+    this.setState({
+      fishes: require("./sample-fishes")
+    });
+  };
+
+  public renderFish = (key) => {
+    let fishData: FishDataProps = {
+      key: key,
+      index: key,
+      details: this.state.fishes[key]
+    };
+    return <Fish {...fishData}/>;
   };
 
   render() {
@@ -51,10 +72,32 @@ class App extends React.Component<any, any> {
       <div className="catch-of-the-day">
         <div className="menu">
           <Header tagline="Fresh Seafood Market" />
+          <ul className="list-of-fishes">
+            {Object.keys(this.state.fishes).map(this.renderFish)}
+          </ul>
         </div>
         <Order />
-        <Inventory addFish={this.addFish}/>
+        <Inventory addFish={this.addFish} loadSamples={this.loadSamples}/>
       </div>
+    );
+  }
+}
+
+/**
+ * Fish component
+ */
+class Fish extends React.Component<FishDataProps, any> {
+  render() {
+    let details = this.props.details;
+    return (
+      <li className="menu-fish">
+        <img src={details.image} alt={details.name} />
+        <h3 className="fish-name">
+          {details.name}
+          <span className="price">{h.formatPrice(details.price)}</span>
+        </h3>
+        <p>{details.desc}</p>
+      </li>
     );
   }
 }
@@ -65,7 +108,7 @@ class App extends React.Component<any, any> {
 class AddFishForm extends React.Component<AddFishProps, any> {
   private createFish = (event: React.FormEvent) => {
     event.preventDefault();
-    let fish: Fish = {
+    let fish: FishObject = {
       name  : findDOMNode<HTMLInputElement>(this.refs["name"]).value,
       price : parseInt(findDOMNode<HTMLInputElement>(this.refs["price"]).value),
       status: findDOMNode<HTMLInputElement>(this.refs["status"]).value,
@@ -112,6 +155,7 @@ class Inventory extends React.Component<any, any> {
       <div>
         <h2>Inventory</h2>
         <AddFishForm {...this.props}/>
+        <button onClick={this.props.loadSamples}>Load Sample Fishes</button>
       </div>
     );
   }
