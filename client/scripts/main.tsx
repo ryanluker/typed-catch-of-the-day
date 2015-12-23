@@ -87,8 +87,13 @@ class App extends React.Component<any, any> {
  * Fish component
  */
 class Fish extends React.Component<FishDataProps, any> {
+  private onButtonClick = () => {
+    this.props.addToOrder(this.props.index);
+  };
   render() {
     let details = this.props.details;
+    let isAvailable: boolean = (details.status === "available" ? true : false);
+    let buttonText: string = (isAvailable ? "Add to Order" : "Sold Out!");
     return (
       <li className="menu-fish">
         <img src={details.image} alt={details.name} />
@@ -97,6 +102,7 @@ class Fish extends React.Component<FishDataProps, any> {
           <span className="price">{h.formatPrice(details.price)}</span>
         </h3>
         <p>{details.desc}</p>
+        <button disabled={!isAvailable} onClick={this.onButtonClick}>{buttonText}</button>
       </li>
     );
   }
