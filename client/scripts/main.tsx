@@ -169,10 +169,48 @@ class AddFishForm extends React.Component<AddFishProps, any> {
 /**
  * Order Container
  */
-class Order extends React.Component<any, any> {
+class Order extends React.Component<OrderProps, any> {
+  private renderOrder = ( orderIds: string[] ) => {
+    return orderIds.map((key) => {
+      let fish: FishObject = this.props.fishes[key];
+      let count: number = this.props.order[key];
+
+      if(!fish) {
+        return <li key={key}>Sorry, fish no longer available!</li>;
+      }
+      return (
+        <li key={key}>
+          <span>{count}lbs</span>
+          <span>{fish.name}</span>
+          <span className="price">{h.formatPrice(count * fish.price)}</span>
+        </li>
+      );
+    });
+  };
   render() {
+    let orderIds = Object.keys(this.props.order);
+    let total = orderIds.reduce((prevTotal, key) => {
+      let fish: FishObject = this.props.fishes[key];
+      let count: number = this.props.order[key];
+      let isAvailable = fish && fish.status === "available";
+
+      if(fish && isAvailable) {
+        return prevTotal + (count * fish.price || 0);
+      }
+      return prevTotal;
+    }, 0);
+
     return (
-      <p>Order</p>
+      <div className="order-wrap">
+        <h2 className="order-title">Your Order</h2>
+        <ul className="order">
+          {this.renderOrder(orderIds)}
+          <li className="total">
+            <strong>Total:</strong>
+            {h.formatPrice(total)}
+          </li>
+        </ul>
+      </div>
     );
   }
 }
