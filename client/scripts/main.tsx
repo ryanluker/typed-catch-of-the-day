@@ -13,18 +13,21 @@ interface HeaderProps {
   tagline: string;
 }
 
-interface FishObject {
-  name: string;
-  price: number;
-  status: string;
-  desc: string;
-  image: string;
-}
-
 interface FishDataProps {
   key: number;
   index: number;
   details: FishObject;
+  addToOrder(key: number);
+}
+
+interface OrderProps {
+  fishes: Object;
+  order: Object;
+}
+
+interface InventoryProps {
+  addFish(fish: FishObject);
+  loadSamples();
 }
 
 interface AddFishProps {
@@ -32,6 +35,14 @@ interface AddFishProps {
    * takes an object of type Fish and saves it to the app state fishes
    */
   addFish(fish: FishObject);
+}
+
+interface FishObject {
+  name: string;
+  price: number;
+  status: string;
+  desc: string;
+  image: string;
 }
 
 /**
@@ -58,16 +69,30 @@ class App extends React.Component<any, any> {
     });
   };
 
-  public renderFish = (key) => {
+  public renderFish = (key: any) => {
     let fishData: FishDataProps = {
       key: key,
       index: key,
-      details: this.state.fishes[key]
+      details: this.state.fishes[key],
+      addToOrder: this.addToOrder
     };
     return <Fish {...fishData}/>;
   };
 
+  public addToOrder = (key: number) => {
+    this.state.order[key] = this.state.order[key] + 1 || 1;
+    this.setState({ order: this.state.order });
+  };
+
   render() {
+    let orderProps: OrderProps = {
+      fishes: this.state.fishes,
+      order: this.state.order
+    };
+    let inventoryProps: InventoryProps = {
+      addFish: this.addFish,
+      loadSamples: this.loadSamples
+    };
     return (
       <div className="catch-of-the-day">
         <div className="menu">
@@ -76,8 +101,8 @@ class App extends React.Component<any, any> {
             {Object.keys(this.state.fishes).map(this.renderFish)}
           </ul>
         </div>
-        <Order />
-        <Inventory addFish={this.addFish} loadSamples={this.loadSamples}/>
+        <Order {...orderProps}/>
+        <Inventory {...inventoryProps}/>
       </div>
     );
   }
@@ -87,8 +112,13 @@ class App extends React.Component<any, any> {
  * Fish component
  */
 class Fish extends React.Component<FishDataProps, any> {
+  private onButtonClick = () => {
+    this.props.addToOrder(this.props.index);
+  };
   render() {
     let details = this.props.details;
+    let isAvailable: boolean = (details.status === "available" ? true : false);
+    let buttonText: string = (isAvailable ? "Add to Order" : "Sold Out!");
     return (
       <li className="menu-fish">
         <img src={details.image} alt={details.name} />
@@ -97,6 +127,7 @@ class Fish extends React.Component<FishDataProps, any> {
           <span className="price">{h.formatPrice(details.price)}</span>
         </h3>
         <p>{details.desc}</p>
+        <button disabled={!isAvailable} onClick={this.onButtonClick}>{buttonText}</button>
       </li>
     );
   }
@@ -138,10 +169,48 @@ class AddFishForm extends React.Component<AddFishProps, any> {
 /**
  * Order Container
  */
-class Order extends React.Component<any, any> {
+class Order extends React.Component<OrderProps, any> {
+  private renderOrders = ( orderIds: string[] ) => {
+    return orderIds.map((key) => {
+      let fish: FishObject = this.props.fishes[key];
+      let count: number = this.props.order[key];
+
+      if(!fish) {
+        return <li key={key}>Sorry, fish no longer available!</li>;
+      }
+      return (
+        <li key={key}>
+          <span>{count}lbs</span>
+          <span>{fish.name}</span>
+          <span className="price">{h.formatPrice(count * fish.price)}</span>
+        </li>
+      );
+    });
+  };
   render() {
+    let orderIds = Object.keys(this.props.order);
+    let total = orderIds.reduce((prevTotal, key) => {
+      let fish: FishObject = this.props.fishes[key];
+      let count: number = this.props.order[key];
+      let isAvailable = fish && fish.status === "available";
+
+      if(fish && isAvailable) {
+        return prevTotal + (count * fish.price || 0);
+      }
+      return prevTotal;
+    }, 0);
+
     return (
-      <p>Order</p>
+      <div className="order-wrap">
+        <h2 className="order-title">Your Order</h2>
+        <ul className="order">
+          {this.renderOrders(orderIds)}
+          <li className="total">
+            <strong>Total:</strong>
+            {h.formatPrice(total)}
+          </li>
+        </ul>
+      </div>
     );
   }
 }
