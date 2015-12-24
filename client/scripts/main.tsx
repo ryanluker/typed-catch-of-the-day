@@ -57,6 +57,42 @@ class App extends React.Component<any, any> {
     };
   };
 
+  componentDidMount() {
+    this.loadOrderData();
+    this.loadFishesData();
+  };
+
+  componentWillUpdate(nextProps, nextState) {
+    this.storeOrderData(nextState.order);
+    this.storeFishesData(nextState.fishes);
+  };
+
+  private storeOrderData = (data: Object) => {
+    let order = JSON.stringify(data);
+    localStorage.setItem("order-" + this.props.params.storeId, order);
+  };
+
+  private loadOrderData = () => {
+    let storeRefOrder: string = localStorage.getItem("order-" + this.props.params.storeId);
+
+    if(storeRefOrder) {
+      this.setState({"order": JSON.parse(storeRefOrder)});
+    }
+  };
+
+  private storeFishesData = (data: Object) => {
+    let fishes = JSON.stringify(data);
+    localStorage.setItem("fishes-" + this.props.params.storeId, fishes);
+  };
+
+  private loadFishesData = () => {
+    let storeRefFishes: string = localStorage.getItem("fishes-" + this.props.params.storeId);
+
+    if(storeRefFishes) {
+      this.setState({"fishes": JSON.parse(storeRefFishes)});
+    }
+  };
+
   public addFish = (fish: FishObject) => {
     let timestamp = (new Date()).getTime();
     this.state.fishes["fish-" + timestamp] = fish;
