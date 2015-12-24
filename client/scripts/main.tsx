@@ -59,10 +59,12 @@ class App extends React.Component<any, any> {
 
   componentDidMount() {
     this.loadOrderData();
+    this.loadFishesData();
   };
 
   componentWillUpdate(nextProps, nextState) {
     this.storeOrderData(nextState.order);
+    this.storeFishesData(nextState.fishes);
   };
 
   private storeOrderData = (data: Object) => {
@@ -75,6 +77,19 @@ class App extends React.Component<any, any> {
 
     if(storeRefOrder) {
       this.setState({"order": JSON.parse(storeRefOrder)});
+    }
+  };
+
+  private storeFishesData = (data: Object) => {
+    let fishes = JSON.stringify(data);
+    localStorage.setItem("fishes-" + this.props.params.storeId, fishes);
+  };
+
+  private loadFishesData = () => {
+    let storeRefFishes: string = localStorage.getItem("fishes-" + this.props.params.storeId);
+
+    if(storeRefFishes) {
+      this.setState({"fishes": JSON.parse(storeRefFishes)});
     }
   };
 
