@@ -170,7 +170,7 @@ class AddFishForm extends React.Component<AddFishProps, any> {
  * Order Container
  */
 class Order extends React.Component<OrderProps, any> {
-  private renderOrder = ( orderIds: string[] ) => {
+  private renderOrders = ( orderIds: string[] ) => {
     return orderIds.map((key) => {
       let fish: FishObject = this.props.fishes[key];
       let count: number = this.props.order[key];
@@ -204,7 +204,7 @@ class Order extends React.Component<OrderProps, any> {
       <div className="order-wrap">
         <h2 className="order-title">Your Order</h2>
         <ul className="order">
-          {this.renderOrder(orderIds)}
+          {this.renderOrders(orderIds)}
           <li className="total">
             <strong>Total:</strong>
             {h.formatPrice(total)}
