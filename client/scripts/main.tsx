@@ -28,6 +28,15 @@ interface OrderProps {
 interface InventoryProps {
   addFish(fish: FishObject);
   loadSamples();
+  fishes: Object;
+  updateFish(key: string, attr: string, value: string | number);
+}
+
+interface UpdateFishProps {
+  key: string;
+  index: string;
+  fish: FishObject;
+  updateFish(key: string, attr: string, value: string | number);
 }
 
 interface AddFishProps {
@@ -99,6 +108,11 @@ class App extends React.Component<any, any> {
     this.setState({fishes: this.state.fishes});
   };
 
+  public updateFish = (key: string, attr: string, value: string | number) => {
+    this.state.fishes[key][attr] = value;
+    this.setState({fishes: this.state.fishes});
+  };
+
   public loadSamples = () => {
     this.setState({
       fishes: require("./sample-fishes")
@@ -127,7 +141,9 @@ class App extends React.Component<any, any> {
     };
     let inventoryProps: InventoryProps = {
       addFish: this.addFish,
-      loadSamples: this.loadSamples
+      loadSamples: this.loadSamples,
+      fishes: this.state.fishes,
+      updateFish: this.updateFish
     };
     return (
       <div className="catch-of-the-day">
@@ -252,13 +268,63 @@ class Order extends React.Component<OrderProps, any> {
 }
 
 /**
+ * Update Fish Form
+ */
+class UpdateFishForm extends React.Component<UpdateFishProps, any> {
+  /**
+   * takes an attribute that will update based on value
+   */
+  private update = (attr: string) => {
+    return (event: React.FormEvent) => {
+      this.props.updateFish(this.props.index, attr, event.target["value"]);
+    };
+  };
+
+  render() {
+    let fish = this.props.fish;
+    return (
+      <div className="fish-edit" ref="editFish">
+        <input type="text" ref="name" value={fish.name} onChange={this.update("name")}/>
+        <input type="text" ref="price" value={fish.price.toString()} onChange={this.update("price")} />
+        <select ref="status" value={fish.status} onChange={this.update("status")}>
+          <option value="available">Fresh!</option>
+          <option value="unavailable">Sold Out!</option>
+        </select>
+        <textarea type="text" ref="desc" value={fish.desc} onChange={this.update("desc")}/>
+        <input type="text" ref="image" value={fish.image} onChange={this.update("image")}/>
+      </div>
+    );
+  }
+}
+
+/**
  * Inventory Component
  */
-class Inventory extends React.Component<any, any> {
+class Inventory extends React.Component<InventoryProps, any> {
+  /**
+   * takes the fishes and renders in the form fields
+   * @params {string[]} fishes
+   * @return jsx
+   */
+  private renderFishes = ( fishes: string[] ) => {
+    return fishes.map((key) => {
+      let updateFishProps: UpdateFishProps = {
+        key: key,
+        index: key,
+        fish: this.props.fishes[key],
+        updateFish: this.props.updateFish
+      };
+      return (
+        <UpdateFishForm {...updateFishProps}/>
+      );
+    });
+  };
   render() {
+    let fishes = Object.keys(this.props.fishes);
     return (
       <div>
         <h2>Inventory</h2>
+        {this.renderFishes(fishes)}
         <AddFishForm {...this.props}/>
         <button onClick={this.props.loadSamples}>Load Sample Fishes</button>
       </div>
