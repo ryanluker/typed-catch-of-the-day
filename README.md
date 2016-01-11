@@ -1,5 +1,5 @@
 # typed-catch-of-the-day
-typescript reactjs version of Wes Bos' tutorial series!
+typescript reactjs version of Wes Bos' reactjs for beginners tutorial series!
 
 Follow my progress by checking out the PR's as I progress through the series.
 
