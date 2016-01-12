@@ -23,6 +23,7 @@ interface FishDataProps {
 interface OrderProps {
   fishes: Object;
   order: Object;
+  removeFromOrder(key: string);
 }
 
 interface InventoryProps {
@@ -30,6 +31,7 @@ interface InventoryProps {
   loadSamples();
   fishes: Object;
   updateFish(key: string, attr: string, value: string | number);
+  removeFish(key: string);
 }
 
 interface UpdateFishProps {
@@ -37,6 +39,15 @@ interface UpdateFishProps {
   index: string;
   fish: FishObject;
   updateFish(key: string, attr: string, value: string | number);
+  removeFish(key: string);
+}
+
+interface FishOrderProps {
+  key: string;
+  index: string;
+  fish: FishObject;
+  count: number;
+  removeFromOrder(key: string);
 }
 
 interface AddFishProps {
@@ -102,6 +113,18 @@ class App extends React.Component<any, any> {
     }
   };
 
+  public removeFish = (key: string) => {
+    if(confirm("Are you sure you wish to remove fish?")) {
+      delete this.state.fishes[key];
+      this.setState({fishes: this.state.fishes});
+    }
+  };
+
+  public removeFromOrder = (key: string) => {
+    delete this.state.order[key];
+    this.setState({ order: this.state.order });
+  };
+
   public addFish = (fish: FishObject) => {
     let timestamp = (new Date()).getTime();
     this.state.fishes["fish-" + timestamp] = fish;
@@ -137,13 +160,15 @@ class App extends React.Component<any, any> {
   render() {
     let orderProps: OrderProps = {
       fishes: this.state.fishes,
-      order: this.state.order
+      order: this.state.order,
+      removeFromOrder: this.removeFromOrder
     };
     let inventoryProps: InventoryProps = {
       addFish: this.addFish,
       loadSamples: this.loadSamples,
       fishes: this.state.fishes,
-      updateFish: this.updateFish
+      updateFish: this.updateFish,
+      removeFish: this.removeFish
     };
     return (
       <div className="catch-of-the-day">
@@ -224,21 +249,20 @@ class AddFishForm extends React.Component<AddFishProps, any> {
 class Order extends React.Component<OrderProps, any> {
   private renderOrders = ( orderIds: string[] ) => {
     return orderIds.map((key) => {
-      let fish: FishObject = this.props.fishes[key];
-      let count: number = this.props.order[key];
+      let fishOrderProps: FishOrderProps = {
+        key: key,
+        index: key,
+        fish: this.props.fishes[key],
+        count: this.props.order[key],
+        removeFromOrder: this.props.removeFromOrder
+      };
 
-      if(!fish) {
-        return <li key={key}>Sorry, fish no longer available!</li>;
-      }
       return (
-        <li key={key}>
-          <span>{count}lbs</span>
-          <span>{fish.name}</span>
-          <span className="price">{h.formatPrice(count * fish.price)}</span>
-        </li>
+        <FishOrder {...fishOrderProps}/>
       );
     });
   };
+
   render() {
     let orderIds = Object.keys(this.props.order);
     let total = orderIds.reduce((prevTotal, key) => {
@@ -267,6 +291,30 @@ class Order extends React.Component<OrderProps, any> {
   }
 }
 
+class FishOrder extends React.Component<FishOrderProps, any> {
+  private removeFromOrder = () => {
+    this.props.removeFromOrder(this.props.index);
+  };
+
+  render() {
+    let fish = this.props.fish;
+    let count = this.props.count;
+    let removeButton = <button onClick={this.removeFromOrder}>X</button>;
+
+    if(!fish) {
+      return <li key={this.props.index}>Sorry, fish no longer available! {removeButton}</li>;
+    }
+    return (
+      <li key={this.props.index}>
+        <span>{count}lbs</span>
+        <span>{fish.name}</span>
+        <span className="price">{h.formatPrice(count * fish.price)}</span>
+        {removeButton}
+      </li>
+    );
+  }
+}
+
 /**
  * Update Fish Form
  */
@@ -280,18 +328,26 @@ class UpdateFishForm extends React.Component<UpdateFishProps, any> {
     };
   };
 
+  /**
+   * takes the index prop and says to remove self
+   */
+  private remove = () => {
+    this.props.removeFish(this.props.index);
+  };
+
   render() {
     let fish = this.props.fish;
     return (
       <div className="fish-edit" ref="editFish">
         <input type="text" ref="name" value={fish.name} onChange={this.update("name")}/>
-        <input type="text" ref="price" value={fish.price.toString()} onChange={this.update("price")} />
+        <input type="text" ref="price" value={fish.price.toString()} onChange={this.update("price")}/>
         <select ref="status" value={fish.status} onChange={this.update("status")}>
           <option value="available">Fresh!</option>
           <option value="unavailable">Sold Out!</option>
         </select>
         <textarea type="text" ref="desc" value={fish.desc} onChange={this.update("desc")}/>
         <input type="text" ref="image" value={fish.image} onChange={this.update("image")}/>
+        <button onClick={this.remove}>Remove Fish</button>
       </div>
     );
   }
@@ -312,7 +368,8 @@ class Inventory extends React.Component<InventoryProps, any> {
         key: key,
         index: key,
         fish: this.props.fishes[key],
-        updateFish: this.props.updateFish
+        updateFish: this.props.updateFish,
+        removeFish: this.props.removeFish
       };
       return (
         <UpdateFishForm {...updateFishProps}/>
