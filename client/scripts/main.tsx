@@ -30,6 +30,7 @@ interface InventoryProps {
   loadSamples();
   fishes: Object;
   updateFish(key: string, attr: string, value: string | number);
+  removeFish(key: string);
 }
 
 interface UpdateFishProps {
@@ -37,6 +38,7 @@ interface UpdateFishProps {
   index: string;
   fish: FishObject;
   updateFish(key: string, attr: string, value: string | number);
+  removeFish(key: string);
 }
 
 interface AddFishProps {
@@ -102,6 +104,13 @@ class App extends React.Component<any, any> {
     }
   };
 
+  public removeFish = (key: string) => {
+    if(confirm("Are you sure you wish to remove fish?")) {
+      delete this.state.fishes[key];
+      this.setState({fishes: this.state.fishes});
+    }
+  };
+
   public addFish = (fish: FishObject) => {
     let timestamp = (new Date()).getTime();
     this.state.fishes["fish-" + timestamp] = fish;
@@ -143,7 +152,8 @@ class App extends React.Component<any, any> {
       addFish: this.addFish,
       loadSamples: this.loadSamples,
       fishes: this.state.fishes,
-      updateFish: this.updateFish
+      updateFish: this.updateFish,
+      removeFish: this.removeFish
     };
     return (
       <div className="catch-of-the-day">
@@ -280,18 +290,26 @@ class UpdateFishForm extends React.Component<UpdateFishProps, any> {
     };
   };
 
+  /**
+   * takes the index prop and says to remove self
+   */
+  private remove = () => {
+    this.props.removeFish(this.props.index);
+  };
+
   render() {
     let fish = this.props.fish;
     return (
       <div className="fish-edit" ref="editFish">
         <input type="text" ref="name" value={fish.name} onChange={this.update("name")}/>
-        <input type="text" ref="price" value={fish.price.toString()} onChange={this.update("price")} />
+        <input type="text" ref="price" value={fish.price.toString()} onChange={this.update("price")}/>
         <select ref="status" value={fish.status} onChange={this.update("status")}>
           <option value="available">Fresh!</option>
           <option value="unavailable">Sold Out!</option>
         </select>
         <textarea type="text" ref="desc" value={fish.desc} onChange={this.update("desc")}/>
         <input type="text" ref="image" value={fish.image} onChange={this.update("image")}/>
+        <button onClick={this.remove}>Remove Fish</button>
       </div>
     );
   }
@@ -312,7 +330,8 @@ class Inventory extends React.Component<InventoryProps, any> {
         key: key,
         index: key,
         fish: this.props.fishes[key],
-        updateFish: this.props.updateFish
+        updateFish: this.props.updateFish,
+        removeFish: this.props.removeFish
       };
       return (
         <UpdateFishForm {...updateFishProps}/>
