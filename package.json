@@ -6,28 +6,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "ryanluker",
+  "license": "MIT",
   "devDependencies": {
-    "autobind-decorator": "1.3.2",
-    "browser-sync": "2.9.11",
-    "connect-history-api-fallback": "1.1.0",
     "css-loader": "^0.23.0",
-    "firebase": "2.3.1",
+    "file-loader": "^0.8.5",
     "history": "1.12.5",
-    "install": "0.1.8",
-    "re-base": "1.2.1",
     "react": "0.14.0",
     "react-addons-css-transition-group": "0.14.0",
-    "react-catalyst": "0.3.0",
     "react-dom": "0.14.0",
-    "react-mixin": "3.0.0",
     "react-router": "^1.0.0",
     "style-loader": "^0.13.0",
     "stylus-loader": "^1.4.2",
     "ts-loader": "^0.7.1",
     "tslint": "^3.1.1",
     "typescript": "^1.6.2",
+    "url-loader": "^0.5.7",
     "webpack": "^1.12.6",
     "webpack-dev-server": "^1.12.1"
   }

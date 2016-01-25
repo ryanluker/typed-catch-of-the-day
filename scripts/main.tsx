@@ -6,6 +6,9 @@ import { Router, Route, History } from "react-router";
 import helpers from "./helpers";
 let h = new helpers();
 
+// Stylus
+import "../css/style.styl";
+
 /**
  * Interfaces
  */
