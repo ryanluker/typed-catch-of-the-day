@@ -287,7 +287,7 @@ class Order extends React.Component<OrderProps, any> {
       transitionEnterTimeout: 500,
       transitionLeaveTimeout: 500,
       className: "order"
-    }
+    };
 
     return (
       <div className="order-wrap">
@@ -316,9 +316,10 @@ class FishOrder extends React.Component<FishOrderProps, any> {
     let countWheel = {
       component: "span",
       transitionName: "count",
+      className: "count",
       transitionEnterTimeout: 250,
       transitionLeaveTimeout: 250
-    }
+    };
 
     if(!fish) {
       return <li key={this.props.index}>Sorry, fish no longer available! {removeButton}</li>;
