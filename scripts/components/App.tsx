@@ -7,7 +7,7 @@ import { Order } from "./Order";
 import { Inventory } from "./Inventory";
 
 // Import Interfaces
-import { OrderProps, FishDataProps, FishObject, InventoryProps } from "../interfaces";
+import { OrderProps, FishDataProps, FishData, InventoryProps } from "../interfaces";
 
 /**
  * App container
@@ -69,7 +69,7 @@ export class App extends React.Component<any, any> {
     this.setState({ order: this.state.order });
   };
 
-  public addFish = (fish: FishObject) => {
+  public addFish = (fish: FishData) => {
     let timestamp = (new Date()).getTime();
     this.state.fishes["fish-" + timestamp] = fish;
     this.setState({fishes: this.state.fishes});

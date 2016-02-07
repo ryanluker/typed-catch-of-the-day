@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as CSSTransitionGroup from "react-addons-css-transition-group";
-import { FishObject, OrderProps, FishOrderProps } from "../interfaces";
+import { FishData, OrderProps, FishOrderProps } from "../interfaces";
 
 import { FishOrder } from "./FishOrder";
 
@@ -30,7 +30,7 @@ export class Order extends React.Component<OrderProps, any> {
   render() {
     let orderIds = Object.keys(this.props.order);
     let total = orderIds.reduce((prevTotal, key) => {
-      let fish: FishObject = this.props.fishes[key];
+      let fish: FishData = this.props.fishes[key];
       let count: number = this.props.order[key];
       let isAvailable = fish && fish.status === "available";
 

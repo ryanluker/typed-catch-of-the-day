@@ -1,11 +1,11 @@
 export interface FishDataProps {
   key: number;
   index: number;
-  details: FishObject;
+  details: FishData;
   addToOrder(key: number);
 }
 
-export interface FishObject {
+export interface FishData {
   name: string;
   price: number;
   status: string;
@@ -16,7 +16,7 @@ export interface FishObject {
 export interface FishOrderProps {
   key: string;
   index: string;
-  fish: FishObject;
+  fish: FishData;
   count: number;
   removeFromOrder(key: string);
 }
@@ -30,13 +30,13 @@ export interface OrderProps {
 export interface UpdateFishProps {
   key: string;
   index: string;
-  fish: FishObject;
+  fish: FishData;
   updateFish(key: string, attr: string, value: string | number);
   removeFish(key: string);
 }
 
 export interface InventoryProps {
-  addFish(fish: FishObject);
+  addFish(fish: FishData);
   loadSamples();
   fishes: Object;
   updateFish(key: string, attr: string, value: string | number);

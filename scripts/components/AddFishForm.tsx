@@ -1,13 +1,13 @@
 import * as React from "react";
 import { findDOMNode } from "react-dom";
-import { FishObject } from "../interfaces";
+import { FishData } from "../interfaces";
 
 import helpers from "../helpers";
 let h = new helpers();
 
 //Interfaces
 interface AddFishProps {
-  addFish(fish: FishObject);
+  addFish(fish: FishData);
 }
 
 /**
@@ -16,7 +16,7 @@ interface AddFishProps {
 export class AddFishForm extends React.Component<AddFishProps, any> {
   private createFish = (event: React.FormEvent) => {
     event.preventDefault();
-    let fish: FishObject = {
+    let fish: FishData = {
       name  : findDOMNode<HTMLInputElement>(this.refs["name"]).value,
       price : parseInt(findDOMNode<HTMLInputElement>(this.refs["price"]).value),
       status: findDOMNode<HTMLInputElement>(this.refs["status"]).value,
