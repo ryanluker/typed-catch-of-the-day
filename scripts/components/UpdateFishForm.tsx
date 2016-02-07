@@ -1,9 +1,6 @@
 import * as React from "react";
 import {UpdateFishProps} from "../interfaces";
 
-import helpers from "../helpers";
-let h = new helpers();
-
 /**
  * Update Fish Form
  */

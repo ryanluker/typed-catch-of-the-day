@@ -1,12 +1,8 @@
 import * as React from "react";
-import { render, findDOMNode } from "react-dom";
-import * as CSSTransitionGroup from "react-addons-css-transition-group";
+import { render } from "react-dom";
 
 import { createHistory } from "history";
-import { Router, Route, History } from "react-router";
-
-import helpers from "./helpers";
-let h = new helpers();
+import { Router, Route } from "react-router";
 
 // Import Components
 import {NotFound} from "./components/NotFound";
@@ -15,27 +11,14 @@ import {Header} from "./components/Header";
 import {Fish} from "./components/Fish";
 import {Order} from "./components/Order";
 import {UpdateFishForm} from "./components/UpdateFishForm";
+import {AddFishForm} from "./components/AddFishForm";
+import {Inventory} from "./components/Inventory";
 
 // Import Interfaces
-import {FishDataProps, FishObject, OrderProps, UpdateFishProps} from "./interfaces";
+import {FishDataProps, FishObject, OrderProps, UpdateFishProps, InventoryProps} from "./interfaces";
 
 // Stylus
 import "../css/style.styl";
-
-interface InventoryProps {
-  addFish(fish: FishObject);
-  loadSamples();
-  fishes: Object;
-  updateFish(key: string, attr: string, value: string | number);
-  removeFish(key: string);
-}
-
-interface AddFishProps {
-  /**
-   * takes an object of type Fish and saves it to the app state fishes
-   */
-  addFish(fish: FishObject);
-}
 
 /**
  * App container
@@ -152,75 +135,6 @@ class App extends React.Component<any, any> {
         </div>
         <Order {...orderProps}/>
         <Inventory {...inventoryProps}/>
-      </div>
-    );
-  }
-}
-
-/**
- * Add Fish Form
- */
-class AddFishForm extends React.Component<AddFishProps, any> {
-  private createFish = (event: React.FormEvent) => {
-    event.preventDefault();
-    let fish: FishObject = {
-      name  : findDOMNode<HTMLInputElement>(this.refs["name"]).value,
-      price : parseInt(findDOMNode<HTMLInputElement>(this.refs["price"]).value),
-      status: findDOMNode<HTMLInputElement>(this.refs["status"]).value,
-      desc  : findDOMNode<HTMLInputElement>(this.refs["desc"]).value,
-      image : findDOMNode<HTMLInputElement>(this.refs["image"]).value
-    };
-    this.props.addFish(fish);
-    findDOMNode<HTMLFormElement>(this.refs["fishForm"]).reset();
-  };
-  render() {
-    return (
-      <form className="fish-edit" ref="fishForm" onSubmit={this.createFish}>
-        <input type="text" ref="name" placeholder="Fish Name"/>
-        <input type="text" ref="price" placeholder="Fish Price" />
-        <select ref="status">
-          <option value="available">Fresh!</option>
-          <option value="unavailable">Sold Out!</option>
-        </select>
-        <textarea type="text" ref="desc" placeholder="Desc"></textarea>
-        <input type="text" ref="image" placeholder="URL to Image" />
-        <button type="submit">+ Add Item </button>
-      </form>
-    );
-  }
-}
-
-/**
- * Inventory Component
- */
-class Inventory extends React.Component<InventoryProps, any> {
-  /**
-   * takes the fishes and renders in the form fields
-   * @params {string[]} fishes
-   * @return jsx
-   */
-  private renderFishes = ( fishes: string[] ) => {
-    return fishes.map((key) => {
-      let updateFishProps: UpdateFishProps = {
-        key: key,
-        index: key,
-        fish: this.props.fishes[key],
-        updateFish: this.props.updateFish,
-        removeFish: this.props.removeFish
-      };
-      return (
-        <UpdateFishForm {...updateFishProps}/>
-      );
-    });
-  };
-  render() {
-    let fishes = Object.keys(this.props.fishes);
-    return (
-      <div>
-        <h2>Inventory</h2>
-        {this.renderFishes(fishes)}
-        <AddFishForm {...this.props}/>
-        <button onClick={this.props.loadSamples}>Load Sample Fishes</button>
       </div>
     );
   }

@@ -34,3 +34,11 @@ export interface UpdateFishProps {
   updateFish(key: string, attr: string, value: string | number);
   removeFish(key: string);
 }
+
+export interface InventoryProps {
+  addFish(fish: FishObject);
+  loadSamples();
+  fishes: Object;
+  updateFish(key: string, attr: string, value: string | number);
+  removeFish(key: string);
+}
