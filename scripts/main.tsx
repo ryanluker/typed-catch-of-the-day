@@ -8,15 +8,17 @@ import { Router, Route, History } from "react-router";
 import helpers from "./helpers";
 let h = new helpers();
 
+// Import Components
+import {NotFound} from "./components/NotFound";
+import {StorePicker} from "./components/StorePicker";
+import {Header} from "./components/Header";
+
 // Stylus
 import "../css/style.styl";
 
 /**
  * Interfaces
  */
-interface HeaderProps {
-  tagline: string;
-}
 
 interface FishDataProps {
   key: number;
@@ -406,58 +408,6 @@ class Inventory extends React.Component<InventoryProps, any> {
         <AddFishForm {...this.props}/>
         <button onClick={this.props.loadSamples}>Load Sample Fishes</button>
       </div>
-    );
-  }
-}
-
-/**
- * Header Component
- */
-class Header extends React.Component<HeaderProps, any> {
-  render() {
-    return (
-      <header className="top">
-        <h1>
-          Catch
-          <span className="ofThe">
-            <span className="of">of</span>
-            <span className="the">the</span>
-          </span>
-          Day
-        </h1>
-        <h3 className="tagline"><span>{this.props.tagline}</span></h3>
-      </header>
-    );
-  }
-}
-
-/**
- * Store Picker example
- */
-class StorePicker extends React.Component<any, any> {
-  private goToStore = (event: React.FormEvent) => {
-    event.preventDefault();
-    let storeInput = findDOMNode<HTMLInputElement>(this.refs["storeId"]);
-    this.props.history.replaceState(null, "/store/" + storeInput.value);
-  };
-  render() {
-    return (
-      <form className="store-selector" onSubmit={this.goToStore}>
-        <h2>Please Enter a Store</h2>
-        <input type="text" ref="storeId" defaultValue={h.getFunName()} required />
-        <input type="submit" />
-      </form>
-    );
-  }
-}
-
-/**
- * Not Found
- */
-class NotFound extends React.Component<any, any> {
-  render() {
-    return (
-      <h1>Not Found</h1>
     );
   }
 }
