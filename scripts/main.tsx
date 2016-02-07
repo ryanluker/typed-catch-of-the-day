@@ -1,5 +1,7 @@
 import * as React from "react";
 import { render, findDOMNode } from "react-dom";
+import * as CSSTransitionGroup from "react-addons-css-transition-group";
+
 import { createHistory } from "history";
 import { Router, Route, History } from "react-router";
 
@@ -279,16 +281,24 @@ class Order extends React.Component<OrderProps, any> {
       return prevTotal;
     }, 0);
 
+    let fishFlyIn = {
+      component: "ul",
+      transitionName: "order",
+      transitionEnterTimeout: 500,
+      transitionLeaveTimeout: 500,
+      className: "order"
+    }
+
     return (
       <div className="order-wrap">
         <h2 className="order-title">Your Order</h2>
-        <ul className="order">
+        <CSSTransitionGroup {...fishFlyIn}>
           {this.renderOrders(orderIds)}
           <li className="total">
             <strong>Total:</strong>
             {h.formatPrice(total)}
           </li>
-        </ul>
+        </CSSTransitionGroup>
       </div>
     );
   }
@@ -303,16 +313,23 @@ class FishOrder extends React.Component<FishOrderProps, any> {
     let fish = this.props.fish;
     let count = this.props.count;
     let removeButton = <button onClick={this.removeFromOrder}>X</button>;
+    let countWheel = {
+      component: "span",
+      transitionName: "count",
+      transitionEnterTimeout: 250,
+      transitionLeaveTimeout: 250
+    }
 
     if(!fish) {
       return <li key={this.props.index}>Sorry, fish no longer available! {removeButton}</li>;
     }
     return (
       <li key={this.props.index}>
-        <span>{count}lbs</span>
-        <span>{fish.name}</span>
+        <CSSTransitionGroup {...countWheel}>
+          <span key={count}>{count}</span>
+        </CSSTransitionGroup>
+        lbs {fish.name} {removeButton}
         <span className="price">{h.formatPrice(count * fish.price)}</span>
-        {removeButton}
       </li>
     );
   }
