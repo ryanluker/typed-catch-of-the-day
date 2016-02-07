@@ -12,3 +12,17 @@ export interface FishObject {
   desc: string;
   image: string;
 }
+
+export interface FishOrderProps {
+  key: string;
+  index: string;
+  fish: FishObject;
+  count: number;
+  removeFromOrder(key: string);
+}
+
+export interface OrderProps {
+  fishes: Object;
+  order: Object;
+  removeFromOrder(key: string);
+}
