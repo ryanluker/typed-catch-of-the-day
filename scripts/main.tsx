@@ -12,20 +12,13 @@ let h = new helpers();
 import {NotFound} from "./components/NotFound";
 import {StorePicker} from "./components/StorePicker";
 import {Header} from "./components/Header";
+import {Fish} from "./components/Fish";
+
+// Import Interfaces
+import {FishDataProps, FishObject} from "./interfaces";
 
 // Stylus
 import "../css/style.styl";
-
-/**
- * Interfaces
- */
-
-interface FishDataProps {
-  key: number;
-  index: number;
-  details: FishObject;
-  addToOrder(key: number);
-}
 
 interface OrderProps {
   fishes: Object;
@@ -62,14 +55,6 @@ interface AddFishProps {
    * takes an object of type Fish and saves it to the app state fishes
    */
   addFish(fish: FishObject);
-}
-
-interface FishObject {
-  name: string;
-  price: number;
-  status: string;
-  desc: string;
-  image: string;
 }
 
 /**
@@ -188,31 +173,6 @@ class App extends React.Component<any, any> {
         <Order {...orderProps}/>
         <Inventory {...inventoryProps}/>
       </div>
-    );
-  }
-}
-
-/**
- * Fish component
- */
-class Fish extends React.Component<FishDataProps, any> {
-  private onButtonClick = () => {
-    this.props.addToOrder(this.props.index);
-  };
-  render() {
-    let details = this.props.details;
-    let isAvailable: boolean = (details.status === "available" ? true : false);
-    let buttonText: string = (isAvailable ? "Add to Order" : "Sold Out!");
-    return (
-      <li className="menu-fish">
-        <img src={details.image} alt={details.name} />
-        <h3 className="fish-name">
-          {details.name}
-          <span className="price">{h.formatPrice(details.price)}</span>
-        </h3>
-        <p>{details.desc}</p>
-        <button disabled={!isAvailable} onClick={this.onButtonClick}>{buttonText}</button>
-      </li>
     );
   }
 }
