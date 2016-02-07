@@ -1,5 +1,5 @@
 import * as React from "react";
-import {UpdateFishProps} from "../interfaces";
+import { UpdateFishProps } from "../interfaces";
 
 /**
  * Update Fish Form

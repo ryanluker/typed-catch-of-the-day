@@ -1,9 +1,9 @@
 import * as React from "react";
-import {InventoryProps, UpdateFishProps} from "../interfaces";
+import { InventoryProps, UpdateFishProps } from "../interfaces";
 
 // Import Components
-import {UpdateFishForm} from "./UpdateFishForm";
-import {AddFishForm} from "./AddFishForm";
+import { UpdateFishForm } from "./UpdateFishForm";
+import { AddFishForm } from "./AddFishForm";
 
 /**
  * Inventory Component

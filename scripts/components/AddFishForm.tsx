@@ -1,6 +1,6 @@
 import * as React from "react";
-import {findDOMNode} from "react-dom";
-import {FishObject} from "../interfaces";
+import { findDOMNode } from "react-dom";
+import { FishObject } from "../interfaces";
 
 import helpers from "../helpers";
 let h = new helpers();

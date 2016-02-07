@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, findDOMNode } from "react-dom";
+import { findDOMNode } from "react-dom";
 
 import helpers from "../helpers";
 let h = new helpers();

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FishDataProps} from "../interfaces";
+import { FishDataProps } from "../interfaces";
 
 import helpers from "../helpers";
 let h = new helpers();
