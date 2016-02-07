@@ -26,3 +26,11 @@ export interface OrderProps {
   order: Object;
   removeFromOrder(key: string);
 }
+
+export interface UpdateFishProps {
+  key: string;
+  index: string;
+  fish: FishObject;
+  updateFish(key: string, attr: string, value: string | number);
+  removeFish(key: string);
+}
