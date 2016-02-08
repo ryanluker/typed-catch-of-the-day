@@ -1,8 +1,7 @@
 import * as React from "react";
-import { findDOMNode } from "react-dom";
-import { FishData } from "../interfaces";
+import { FishData } from "../libs/interfaces";
 
-import helpers from "../helpers";
+import helpers from "../libs/helpers";
 let h = new helpers();
 
 //Interfaces
@@ -14,29 +13,43 @@ interface AddFishProps {
  * Add Fish Form
  */
 export class AddFishForm extends React.Component<AddFishProps, any> {
+  private fishForm: HTMLFormElement;
+  private nameInput: HTMLInputElement;
+  private priceInput: HTMLInputElement;
+  private statusOption: HTMLSelectElement;
+  private descText: HTMLTextAreaElement;
+  private imageInput: HTMLInputElement;
+
+  private linkRef = (link: string) => {
+    return (ref: any) => {
+      this[link] = ref;
+    };
+  };
+
   private createFish = (event: React.FormEvent) => {
     event.preventDefault();
     let fish: FishData = {
-      name  : findDOMNode<HTMLInputElement>(this.refs["name"]).value,
-      price : parseInt(findDOMNode<HTMLInputElement>(this.refs["price"]).value),
-      status: findDOMNode<HTMLInputElement>(this.refs["status"]).value,
-      desc  : findDOMNode<HTMLInputElement>(this.refs["desc"]).value,
-      image : findDOMNode<HTMLInputElement>(this.refs["image"]).value
+      name  : this.nameInput.value,
+      price : parseInt(this.priceInput.value),
+      status: this.statusOption.value,
+      desc  : this.descText.value,
+      image : this.imageInput.value
     };
     this.props.addFish(fish);
-    findDOMNode<HTMLFormElement>(this.refs["fishForm"]).reset();
+    this.fishForm.reset();
   };
+
   render() {
     return (
-      <form className="fish-edit" ref="fishForm" onSubmit={this.createFish}>
-        <input type="text" ref="name" placeholder="Fish Name"/>
-        <input type="text" ref="price" placeholder="Fish Price" />
-        <select ref="status">
+      <form className="fish-edit" ref={this.linkRef("fishForm")} onSubmit={this.createFish}>
+        <input type="text" ref={this.linkRef("nameInput")} placeholder="Fish Name"/>
+        <input type="text" ref={this.linkRef("priceInput")} placeholder="Fish Price" />
+        <select ref={this.linkRef("statusOption")}>
           <option value="available">Fresh!</option>
           <option value="unavailable">Sold Out!</option>
         </select>
-        <textarea type="text" ref="desc" placeholder="Desc"></textarea>
-        <input type="text" ref="image" placeholder="URL to Image" />
+        <textarea type="text" ref={this.linkRef("descText")} placeholder="Desc"></textarea>
+        <input type="text" ref={this.linkRef("imageInput")} placeholder="URL to Image" />
         <button type="submit">+ Add Item </button>
       </form>
     );
