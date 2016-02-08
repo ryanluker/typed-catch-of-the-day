@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as CSSTransitionGroup from "react-addons-css-transition-group";
-import { FishOrderProps } from "../interfaces";
+import { FishOrderProps } from "../libs/interfaces";
 
-import helpers from "../helpers";
+import helpers from "../libs/helpers";
 let h = new helpers();
 
 export class FishOrder extends React.Component<FishOrderProps, any> {
