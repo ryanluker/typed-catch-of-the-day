@@ -1,10 +1,10 @@
 import * as React from "react";
 import * as CSSTransitionGroup from "react-addons-css-transition-group";
-import { FishData, OrderProps, FishOrderProps } from "../interfaces";
+import { FishData, OrderProps, FishOrderProps } from "../libs/interfaces";
 
 import { FishOrder } from "./FishOrder";
 
-import helpers from "../helpers";
+import helpers from "../libs/helpers";
 let h = new helpers();
 
 /**

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InventoryProps, UpdateFishProps } from "../interfaces";
+import { InventoryProps, UpdateFishProps } from "../libs/interfaces";
 
 // Import Components
 import { UpdateFishForm } from "./UpdateFishForm";

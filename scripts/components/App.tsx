@@ -7,7 +7,7 @@ import { Order } from "./Order";
 import { Inventory } from "./Inventory";
 
 // Import Interfaces
-import { OrderProps, FishDataProps, FishData, InventoryProps } from "../interfaces";
+import { OrderProps, FishDataProps, FishData, InventoryProps } from "../libs/interfaces";
 
 /**
  * App container
@@ -82,7 +82,7 @@ export class App extends React.Component<any, any> {
 
   public loadSamples = () => {
     this.setState({
-      fishes: require("../sample-fishes")
+      fishes: require("../libs/sample-fishes")
     });
   };
 

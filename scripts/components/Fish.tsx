@@ -1,7 +1,7 @@
 import * as React from "react";
-import { FishDataProps } from "../interfaces";
+import { FishDataProps } from "../libs/interfaces";
 
-import helpers from "../helpers";
+import helpers from "../libs/helpers";
 let h = new helpers();
 
 /**
