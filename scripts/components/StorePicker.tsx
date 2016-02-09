@@ -17,7 +17,6 @@ export class StorePicker extends React.Component<any, any> {
 
   private goToStore = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(this.storeInput);
     this.props.history.replaceState(null, "/store/" + this.storeInput.value);
   };
 
