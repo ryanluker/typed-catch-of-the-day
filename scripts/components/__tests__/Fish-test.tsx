@@ -72,13 +72,12 @@ describe("Fish", () => {
       },
       addToOrder(key: number){return;}
     };
-
     let fishComp = TestUtils.renderIntoDocument(
       <Fish {...FishData}/>
     );
-
     let button = TestUtils.findRenderedDOMComponentWithTag(fishComp, "button");
     expect(button.textContent).toEqual("Add to Order");
+
     FishData.details.status = "nope";
     let fishCompNew = TestUtils.renderIntoDocument(
       <Fish {...FishData}/>
