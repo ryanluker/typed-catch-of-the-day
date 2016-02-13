@@ -4,7 +4,7 @@
   "description": "typescript version of wes bos' catch of the day app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "ryanluker",
   "license": "MIT",
@@ -26,5 +26,24 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.6",
     "webpack-dev-server": "^1.12.1"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/preprocessor.js",
+    "testFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "testPathDirs": [
+      "<rootDir>/scripts/components/"
+    ],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/*"
+    ]
   }
 }
