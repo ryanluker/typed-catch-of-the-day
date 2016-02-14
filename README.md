@@ -1,6 +1,10 @@
 # typed-catch-of-the-day
 typescript reactjs version of Wes Bos' reactjs for beginners tutorial series!
 
+Follow the flow of the tutorial series by watching the videos and then looking at the relevant PRs.
+
+[starter files](https://github.com/wesbos/React-For-Beginners-Starter-Files)  ||  [course site](https://reactforbeginners.com)  ||  [**Start**](https://github.com/ryanluker/typed-catch-of-the-day/pull/1)
+
 ## Requirements
 - Node v4 +
 - NPM
@@ -31,11 +35,3 @@ typescript reactjs version of Wes Bos' reactjs for beginners tutorial series!
 
 ## Testing
 1) npm test
-
-Follow the flow of the tutorial series by watching the videos and then looking at the relevant PRs.
-
-[starter files](https://github.com/wesbos/React-For-Beginners-Starter-Files)
-
-[course site](https://reactforbeginners.com)
-
-[**Start**](https://github.com/ryanluker/typed-catch-of-the-day/pull/1)
