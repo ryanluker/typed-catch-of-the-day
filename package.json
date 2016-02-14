@@ -1,14 +1,16 @@
 {
   "name": "typed-catch-of-the-day",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "typescript version of wes bos' catch of the day app",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/ryanluker/typed-catch-of-the-day.git"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "typings install",
+    "build": "webpack",
+    "start": "webpack-dev-server --content-base build/ --inline --hot"
   },
   "author": "ryanluker",
   "license": "MIT",
@@ -25,7 +27,11 @@
     "style-loader": "0.13.0",
     "stylus-loader": "1.4.2",
     "ts-loader": "0.7.1",
-    "url-loader": "0.5.7"
+    "typescript": "1.7.5",
+    "typings": "0.6.8",
+    "url-loader": "0.5.7",
+    "webpack": "1.12.6",
+    "webpack-dev-server": "1.12.1"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
