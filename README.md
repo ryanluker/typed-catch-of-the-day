@@ -8,7 +8,7 @@ Follow the flow of the tutorial series by watching the videos and then looking a
 ## Requirements
 - Node v4 +
 - NPM
-- Linux, MacOSX or Windows
+- Linux, Mac or Windows
 
 ## Setup
 - npm install
