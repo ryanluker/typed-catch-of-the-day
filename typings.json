@@ -1,0 +1,17 @@
+{
+  "name": "typed-catch-of-the-day",
+  "ambientDependencies": {
+    "react": "github:DefinitelyTyped/DefinitelyTyped/react/react.d.ts#bcd5761826eb567876c197ccc6a87c4d05731054",
+    "webpack": "github:DefinitelyTyped/DefinitelyTyped/webpack/webpack.d.ts#e5a27ea95e47b95333784f1f0d590127b4e39a89",
+    "react-dom": "github:DefinitelyTyped/DefinitelyTyped/react/react-dom.d.ts#e5a27ea95e47b95333784f1f0d590127b4e39a89",
+    "react-mixin": "github:DefinitelyTyped/DefinitelyTyped/react-mixin/react-mixin.d.ts#e5a27ea95e47b95333784f1f0d590127b4e39a89",
+    "react-router": "github:DefinitelyTyped/DefinitelyTyped/react-router/react-router.d.ts#e5a27ea95e47b95333784f1f0d590127b4e39a89",
+    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#bcd5761826eb567876c197ccc6a87c4d05731054",
+    "stylus": "github:DefinitelyTyped/DefinitelyTyped/stylus/stylus.d.ts#bcd5761826eb567876c197ccc6a87c4d05731054",
+    "history": "github:DefinitelyTyped/DefinitelyTyped/react-router/history.d.ts#e5a27ea95e47b95333784f1f0d590127b4e39a89",
+    "react-addons-transition-group": "github:DefinitelyTyped/DefinitelyTyped/react/react-addons-transition-group.d.ts#86dbea8fc37d9473fee465da4f0a21bea4f8cbd9",
+    "react-addons-css-transition-group": "github:DefinitelyTyped/DefinitelyTyped/react/react-addons-css-transition-group.d.ts#86dbea8fc37d9473fee465da4f0a21bea4f8cbd9",
+    "jest": "github:DefinitelyTyped/DefinitelyTyped/jest/jest.d.ts#bcd5761826eb567876c197ccc6a87c4d05731054",
+    "react-addons-test-utils": "github:DefinitelyTyped/DefinitelyTyped/react/react-addons-test-utils.d.ts#bcd5761826eb567876c197ccc6a87c4d05731054"
+  }
+}
