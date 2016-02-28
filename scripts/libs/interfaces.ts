@@ -5,6 +5,12 @@ export interface FishDataProps {
   addToOrder(key: number);
 }
 
+export interface AddButtonProps {
+  text: string;
+  isAvailable: boolean;
+  addToOrder();
+}
+
 export interface FishData {
   name: string;
   price: number;
