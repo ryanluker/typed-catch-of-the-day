@@ -1,6 +1,6 @@
 import * as React from "react";
-import { FishDataProps, AddButtonProps } from "../libs/interfaces";
 import { AddFishButton } from "./AddFishButton";
+import { FishDataProps, AddButtonProps } from "../libs/interfaces";
 
 import helpers from "../libs/helpers";
 let h = new helpers();
