@@ -27,7 +27,7 @@
     "style-loader": "0.13.0",
     "stylus-loader": "1.4.2",
     "ts-loader": "0.7.1",
-    "typescript": "1.7.5",
+    "typescript": "1.8.2",
     "typings": "0.6.8",
     "url-loader": "0.5.7",
     "webpack": "1.12.6",
