@@ -1,11 +1,9 @@
 import * as React from "react";
 import * as CSSTransitionGroup from "react-addons-css-transition-group";
-import { FishData, OrderProps, FishOrderProps } from "../libs/interfaces";
+import { FishData, OrderProps, FishOrderProps, PriceLabelProps } from "../libs/interfaces";
 
 import { FishOrder } from "./FishOrder";
-
-import helpers from "../libs/helpers";
-let h = new helpers();
+import { PriceLabel } from "./PriceLabel";
 
 /**
  * Order Container
@@ -48,6 +46,10 @@ export class Order extends React.Component<OrderProps, any> {
       className: "order"
     };
 
+    let PriceProps: PriceLabelProps = {
+      price: total
+    };
+
     return (
       <div className="order-wrap">
         <h2 className="order-title">Your Order</h2>
@@ -55,7 +57,7 @@ export class Order extends React.Component<OrderProps, any> {
           {this.renderOrders(orderIds)}
           <li className="total">
             <strong>Total:</strong>
-            {h.formatPrice(total)}
+            <PriceLabel {...PriceProps}/>
           </li>
         </CSSTransitionGroup>
       </div>
