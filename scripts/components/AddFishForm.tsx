@@ -1,9 +1,6 @@
 import * as React from "react";
 import { FishData } from "../libs/interfaces";
 
-import helpers from "../libs/helpers";
-let h = new helpers();
-
 //Interfaces
 interface AddFishProps {
   addFish(fish: FishData);

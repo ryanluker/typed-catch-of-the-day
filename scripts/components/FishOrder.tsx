@@ -1,9 +1,7 @@
 import * as React from "react";
 import * as CSSTransitionGroup from "react-addons-css-transition-group";
-import { FishOrderProps } from "../libs/interfaces";
-
-import helpers from "../libs/helpers";
-let h = new helpers();
+import { PriceLabel } from "./PriceLabel";
+import { FishOrderProps, PriceLabelProps } from "../libs/interfaces";
 
 export class FishOrder extends React.Component<FishOrderProps, any> {
   private removeFromOrder = () => {
@@ -22,6 +20,10 @@ export class FishOrder extends React.Component<FishOrderProps, any> {
       transitionLeaveTimeout: 250
     };
 
+    let PriceProps: PriceLabelProps = {
+      price: (count * fish.price)
+    };
+
     if(!fish) {
       return <li key={this.props.index}>Sorry, fish no longer available! {removeButton}</li>;
     }
@@ -31,7 +33,7 @@ export class FishOrder extends React.Component<FishOrderProps, any> {
           <span key={count}>{count}</span>
         </CSSTransitionGroup>
         lbs {fish.name} {removeButton}
-        <span className="price">{h.formatPrice(count * fish.price)}</span>
+        <PriceLabel {...PriceProps} />
       </li>
     );
   }

@@ -1,5 +1,6 @@
 jest.dontMock("../Fish");
 jest.dontMock("../AddFishButton");
+jest.dontMock("../PriceLabel");
 jest.dontMock("../../libs/interfaces");
 
 import * as React from "react";
