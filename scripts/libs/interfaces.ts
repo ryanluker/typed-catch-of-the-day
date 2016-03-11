@@ -11,6 +11,10 @@ export interface AddButtonProps {
   addToOrder();
 }
 
+export interface PriceLabelProps {
+  price: number;
+}
+
 export interface FishData {
   name: string;
   price: number;
