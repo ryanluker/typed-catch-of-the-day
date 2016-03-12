@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AddFishButton } from "./AddFishButton";
 import { PriceLabel } from "./PriceLabel";
-import { FishDataProps, AddButtonProps, PriceLabelProps } from "../libs/interfaces";
+import { FishDataProps } from "../libs/interfaces";
 
 /**
  * Fish component
@@ -15,14 +15,10 @@ export class Fish extends React.Component<FishDataProps, any> {
     let isAvailable: boolean = (details.status === "available" ? true : false);
     let buttonText: string = (isAvailable ? "Add to Order" : "Sold Out!");
 
-    let AddProps: AddButtonProps = {
+    let AddProps = {
       text: buttonText,
       isAvailable: isAvailable,
       addToOrder: this.onButtonClick
-    };
-
-    let PriceProps: PriceLabelProps = {
-      price: details.price
     };
 
     return (
@@ -30,7 +26,7 @@ export class Fish extends React.Component<FishDataProps, any> {
         <img src={details.image} alt={details.name} />
         <h3 className="fish-name">
           {details.name}
-          <PriceLabel {...PriceProps} />
+          <PriceLabel price={details.price} />
         </h3>
         <p>{details.desc}</p>
         <AddFishButton {...AddProps} />
