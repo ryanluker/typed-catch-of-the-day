@@ -1,11 +1,8 @@
 jest.dontMock("../AddFishButton");
-jest.dontMock("../../libs/interfaces");
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
-
-import {AddButtonProps} from "../../libs/interfaces";
 
 import {AddFishButton} from "../AddFishButton";
 
@@ -13,8 +10,8 @@ describe("AddFishButton", () => {
 
   it("Renders", () => {
 
-    let addFishProps: AddButtonProps = {
-      text: "What does here",
+    let addFishProps = {
+      text: "What goes here",
       isAvailable: false,
       addToOrder: function(){return;}
     };
@@ -23,7 +20,8 @@ describe("AddFishButton", () => {
       <div><AddFishButton {...addFishProps}/></div>
     );
 
-    expect(ReactDOM.findDOMNode(AddFishStateless).textContent).toBe("What does here");
+    expect(ReactDOM.findDOMNode(AddFishStateless).textContent).toBe("What goes here");
+    expect(ReactDOM.findDOMNode(AddFishStateless).innerHTML).toContain("disabled");
   });
 
 });
