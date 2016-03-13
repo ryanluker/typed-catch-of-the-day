@@ -1,6 +1,5 @@
-import * as React from "react";
-import { AddButtonProps } from "../libs/interfaces";
+import React = require("react");
 
-export const AddFishButton: React.StatelessComponent<AddButtonProps> = ({text, isAvailable, addToOrder}) => (
+export const AddFishButton = ({text = "default", isAvailable = true, addToOrder}) => (
   <button disabled={!isAvailable} onClick={addToOrder}>{text}</button>
 );
