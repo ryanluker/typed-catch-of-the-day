@@ -1,4 +1,4 @@
-# typed-catch-of-the-day
+# typed-catch-of-the-day [![Build Status](https://travis-ci.org/ryanluker/typed-catch-of-the-day.svg?branch=master)](https://travis-ci.org/ryanluker/typed-catch-of-the-day)
 typescript reactjs version of Wes Bos' reactjs for beginners tutorial series!
 
 Follow the flow of the tutorial series by watching the videos and then looking at the relevant PRs.
